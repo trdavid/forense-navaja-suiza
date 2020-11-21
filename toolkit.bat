@@ -38,6 +38,8 @@ goto:inicio
 :op1
 echo.
 echo. Has elegido la opcion No. 1 Información Volátil
+echo.
+:inicio1
 echo ------------------------------------------------------------------------------
 echo 1 Generar la Fecha
 echo 2 Generar la Hora
@@ -64,11 +66,27 @@ pause
 echo.
 goto:inicio1
 :op1_1
+:: comienza la opcion 1.1
 echo.
 echo. Has elegido la opcion No. 1.1 Generar Fecha
 cd heramientas_sys_internals
 date /t > ..\resultados_volatiles\fecha_%maquina%.txt
-echo. ya se creo el archivo en la carpeta resultados_volatiles
+echo. ya se creo el archivo de fecha en la carpeta resultados_volatiles
+:: cierra la opción 1.1
+echo.
+pause
+goto:inicio1
+:op1_2
+:: comienza la opcion 1.2
+echo.
+echo. Has elegido la opcion No. 1.2 Generar la Hora
+cd heramientas_sys_internals
+time /t > ..\resultados_volatiles\hora_%maquina%.txt
+echo. ya se creo el archivo de hora en la carpeta resultados_volatiles
+echo.
+pause
+goto:inicio1
+:: cierra la opción 1.2
 ::cierre de la opcion 1
 color 08
 echo.
