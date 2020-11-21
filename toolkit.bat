@@ -4,8 +4,15 @@ MODE con:cols=80 lines=40
 
 :inicio
 SET var=0
+SET var1=0
+SET maquina=0
+
+wmic bios get serialnumber | find "SerialNumber" /v > archivos_temporales/serial_temp.txt
+set /p maquina=<archivos_temporales/serial_temp.txt
+echo %maquina%
+
 cls
-echo Bienvenid@ %USERNAME%
+echo Bienvenid@ %USERNAME% - Usted esta en la máquina con serial %maquina%
 echo ------------------------------------------------------------------------------
 echo %DATE% ^| %TIME%
 echo ------------------------------------------------------------------------------
@@ -60,7 +67,7 @@ goto:inicio1
 echo.
 echo. Has elegido la opcion No. 1.1 Generar Fecha
 cd heramientas_sys_internals
-date /t > ..\resultados_volatiles\fecha.txt
+date /t > ..\resultados_volatiles\fecha_%maquina%.txt
 echo. ya se creo el archivo en la carpeta resultados_volatiles
 ::cierre de la opcion 1
 color 08
