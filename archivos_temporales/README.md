@@ -1,0 +1,1 @@
+# espacio para guardar archivos temporales
