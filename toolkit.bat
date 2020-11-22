@@ -6,6 +6,8 @@ MODE con:cols=80 lines=40
 SET var=0
 SET var1=0
 SET maquina=0
+SET suggested=0
+SET perfil=0
 
 wmic bios get serialnumber | find "SerialNumber" /v > archivos_temporales/serial_temp.txt
 set /p maquina=<archivos_temporales/serial_temp.txt
@@ -195,6 +197,7 @@ echo.
 pause
 echo.
 goto:inicio2
+:: Inicia la opción 2.1
 :op2_1
 echo.
 echo. Has elegido la opcion No. 2.1 Generar Info de Imagen
@@ -205,12 +208,37 @@ echo. Ya se creo la información de la Imagen en la ruta especificada......
 echo.
 pause
 goto:inicio2
-
-
-
-
 echo.
 pause
+:: Se cierra la opción 2.1
+:: Inicia la opción 2.2
+:op2_2
+echo.
+echo. Has elegido la opción No. 2.2 Generar Info del Kernel
+echo.
+cd volatility
+volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
+set /p suggested=<..\archivos_temporales\suggested_temp.txt
+echo Perfiles Encontrados en la imagen
+echo .......................................................
+echo %suggested%
+echo .......................................................
+SET /p perfil= ^> Digite el segundo perfil de la linea anterior para la busqueda:
+volatility.exe -f  ..\imagenes_forenses\memoria.raw --profile=%perfil% kdbgscan | findstr (V) > ..\archivos_temporales\offset_temp.txt
+set /p offset=<..\archivos_temporales\offset_temp.txt
+echo Apuntadores de Menoria en la imagen
+echo .......................................................
+echo %offset%
+echo .......................................................
+SET /p apuntador= ^> Digite el apuntador en pantalla para la busqueda:
+volatility.exe -f ..\imagenes_forenses\memoria.raw --profile=%perfil% --kdbg=%apuntador% pslist> ..\resultados_artefactos\info_kernel_offset.txt
+echo. Ya se creo la información del Kernel en la ruta especificada......
+echo.
+pause
+goto:inicio2
+echo.
+pause
+:: Se cierra la opción 2.2
 goto:inicio
 :: cierra la opción 2
 :op3
