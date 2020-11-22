@@ -58,7 +58,7 @@ echo.
 	if "%var1%"=="3" goto op1_3
 	if "%var1%"=="4" goto op1_4
 	if "%var1%"=="5" goto op1_5
-	if "%var1%"=="6" goto salir
+	if "%var1%"=="6" goto inicio
 ::Mensaje de error, validación cuando se selecciona una opción fuera de rango
 echo. El numero "%var1%" no es una opcion invalida, por favor intente de nuevo.
 echo.
@@ -70,7 +70,7 @@ goto:inicio1
 echo.
 echo. Has elegido la opcion No. 1.1 Generar Fecha
 cd heramientas_sys_internals
-date /t > ..\resultados_volatiles\fecha_%maquina%.txt
+date /t > ..\resultados_volatiles\fecha_%maquina%_.txt
 echo. ya se creo el archivo de fecha en la carpeta resultados_volatiles
 :: cierra la opción 1.1
 echo.
@@ -81,12 +81,48 @@ goto:inicio1
 echo.
 echo. Has elegido la opcion No. 1.2 Generar la Hora
 cd heramientas_sys_internals
-time /t > ..\resultados_volatiles\hora_%maquina%.txt
+time /t > ..\resultados_volatiles\hora_%maquina%_.txt
 echo. ya se creo el archivo de hora en la carpeta resultados_volatiles
 echo.
 pause
 goto:inicio1
 :: cierra la opción 1.2
+:op1_3
+:: comienza la opcion 1.3
+echo.
+echo. Has elegido la opcion No. 1.3 Lista de Procesos
+cd heramientas_sys_internals
+pslist > ..\resultados_volatiles\listado_procesos.txt
+echo. ya se creo el archivo de listado de procesos en la carpeta resultados_volatiles
+echo.
+pause
+goto:inicio1
+:: cierra la opción 1.3
+:op1_4
+:: comienza la opcion 1.4
+echo.
+echo. Has elegido la opcion No. 1.4 Lista de Librerias
+cd heramientas_sys_internals
+listdlls > ..\resultados_volatiles\listado_librerias.txt
+echo. Se ha Generado el archivo de librerias en la carpeta resultados_volatiles
+echo.
+pause
+goto:inicio1
+:: cierra la opción 1.4
+:op1_5
+:: comienza la opcion 1.5
+echo.
+echo. Has elegido la opcion No. 1.5 Todas las anteriores
+cd heramientas_sys_internals
+date /t > ..\resultados_volatiles\fecha_%maquina%_.txt
+time /t > ..\resultados_volatiles\hora_%maquina%_.txt
+pslist > ..\resultados_volatiles\listado_procesos.txt
+listdlls > ..\resultados_volatiles\listado_librerias.txt
+echo. Se ha Generado el los archivos en la carpeta resultados_volatiles
+echo.
+pause
+goto:inicio1
+:: cierra la opción 1.5
 ::cierre de la opcion 1
 color 08
 echo.
