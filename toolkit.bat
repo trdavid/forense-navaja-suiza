@@ -17,7 +17,7 @@ echo ---------------------------------------------------------------------------
 echo %DATE% ^| %TIME%
 echo ------------------------------------------------------------------------------
 echo 1 Información Volátil
-echo 2 Volatility
+echo 2 Volatility (*) Se requiere imagen en formato raw
 echo 3 Salir
 echo ------------------------------------------------------------------------------
 echo.
@@ -128,20 +128,95 @@ color 08
 echo.
 pause
 goto:inicio
+
+
+
+:: comienza la opción 2
 :op2
 echo.
 echo. Has elegido la opcion No. 2
 echo.
-::Aquí van las líneas de comando de tu opción
-color 08
+:inicio2
+SET var2=0
+cls
+echo ------------------------------------------------------------------------------
+echo %DATE% ^| %TIME%
+echo ------------------------------------------------------------------------------
+echo ------------------------------------------------------------------------------
+echo Para ejecutar alguna de estas opciones es necesario que aloje la imagen .raw
+echo imagenes_forenses con el nombre memoria.raw
+echo ------------------------------------------------------------------------------
+echo 2.1 Generar Info de Imagen
+echo 2.2 Generar Info del Kernel
+echo 2.3 Generar Info del Kernel a Nivel Jerarquico
+echo 2.4 Generar Lista de Librerias
+echo 2.5 Generar Uso de Aplicativos
+echo 2.6 Reconstruir y Volcar Ejecutables
+echo 2.7 Reconstruir y Volcar Librerias
+echo 2.8 Reconstruir Eventos
+echo 2.9 Objetos y Ubicacion en memoria RAM
+echo 2.10 Metadatos de Archivos
+echo 2.11 Dispositivos Conectados
+echo 2.12 Ubicación de Registros del Sistema
+echo 2.13 Reconstruir Archivos de Sistema
+echo 2.14 Hash de Contrasena de Usuario
+echo 2.15 Salir
+echo ------------------------------------------------------------------------------
+echo.
+
+
+
+SET /p var2= ^> Seleccione una opcion [1 - 15]:
+
+
+
+if "%var2%"=="0" goto inicio
+if "%var2%"=="1" goto op2_1
+if "%var2%"=="2" goto op2_2
+if "%var2%"=="3" goto op2_3
+if "%var2%"=="4" goto op2_4
+if "%var2%"=="5" goto op2_5
+if "%var2%"=="6" goto op2_6
+if "%var2%"=="7" goto op2_7
+if "%var2%"=="8" goto op2_8
+if "%var2%"=="9" goto op2_9
+if "%var2%"=="10" goto op2_10
+if "%var2%"=="11" goto op2_11
+if "%var2%"=="12" goto op2_12
+if "%var2%"=="13" goto op2_13
+if "%var2%"=="14" goto op2_14
+if "%var2%"=="15" goto inicio
+
+
+
+::Mensaje de error, validación cuando se selecciona una opción fuera de rango
+echo. El numero "%var2%" no es una opcion valida, por favor intente de nuevo.
+echo.
+pause
+echo.
+goto:inicio2
+:op2_1
+echo.
+echo. Has elegido la opcion No. 2.1 Generar Info de Imagen
+echo.
+cd volatility
+volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo > ..\resultados_artefactos\info_imagen_raw.txt
+echo. Ya se creo la información de la Imagen en la ruta especificada......
+echo.
+pause
+goto:inicio2
+
+
+
+
 echo.
 pause
 goto:inicio
+:: cierra la opción 2
 :op3
 echo.
 echo. Has elegido la opcion No. 3
 ::Aquí van las líneas de comando de tu opción
-color 08
 echo.
 pause
 goto:inicio
