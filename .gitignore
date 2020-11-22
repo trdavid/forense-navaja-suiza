@@ -1,4 +1,4 @@
-/imagenes_forenses/*
+/imagenes_forenses/memoria.raw
 /archivos_temporales/*
 /resultados_volatiles/*
-/resultados_artefactos/*
+/resultados_artefactos/info_kernel_offset.txt
