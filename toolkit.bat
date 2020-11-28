@@ -264,10 +264,10 @@ goto:inicio2
 echo.
 pause
 :: Se cierra la opción 2.3
-:: Inicia la opción 2.3
+:: Inicia la opción 2.4
 :op2_4
 echo.
-echo. Has elegido la opcion No. 2.4 Has elegido la opcion No. 2.4 Generar Lista de Librerias
+echo. Has elegido la opcion No. 2.4 Generar Lista de Librerias
 echo.
 cd volatility
 volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
@@ -291,7 +291,35 @@ pause
 goto:inicio2
 echo.
 pause
-:: Se cierra la opción 2.3
+:: Se cierra la opción 2.4
+:: Inicia la opción 2.5
+:op2_5
+echo.
+echo. Has elegido la opcion No. 2.5 Generar Uso de Aplicativos
+echo.
+cd volatility
+volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
+set /p suggested=<..\archivos_temporales\suggested_temp.txt
+echo Perfiles Encontrados en la imagen
+echo .......................................................
+echo %suggested%
+echo .......................................................
+SET /p perfil= ^> Digite el segundo perfil de la linea anterior para la busqueda:
+volatility.exe -f  ..\imagenes_forenses\memoria.raw --profile=%perfil% kdbgscan | findstr (V) > ..\archivos_temporales\offset_temp.txt
+set /p offset=<..\archivos_temporales\offset_temp.txt
+echo Apuntadores de Menoria en la imagen
+echo .......................................................
+echo %offset%
+echo .......................................................
+SET /p apuntador= ^> Digite el apuntador en pantalla para la busqueda:
+volatility.exe -f ..\imagenes_forenses\memoria.raw --profile=%perfil% --kdbg=%apuntador% handles > ..\resultados_artefactos\que_hace_el_app.txt
+echo.Ya se creo la información de los Aplicativos en la ruta especificada...... 
+echo.
+pause
+goto:inicio2
+echo.
+pause
+:: Se cierra la opción 2.5
 goto:inicio
 :: cierra la opción 2
 :op3
