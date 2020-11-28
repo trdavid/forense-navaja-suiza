@@ -235,10 +235,35 @@ volatility.exe -f ..\imagenes_forenses\memoria.raw --profile=%perfil% --kdbg=%ap
 echo. Ya se creo la información del Kernel en la ruta especificada......
 echo.
 pause
+:: Se cierra la opción 2.2
+:: Inicia la opción 2.3
+:op2_3
+echo.
+echo. Has elegido la opcion No. 2.3 Generar Info del Kernel a Nivel Jerarquico
+echo.
+cd volatility
+volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
+set /p suggested=<..\archivos_temporales\suggested_temp.txt
+echo Perfiles Encontrados en la imagen
+echo .......................................................
+echo %suggested%
+echo .......................................................
+SET /p perfil= ^> Digite el segundo perfil de la linea anterior para la busqueda:
+volatility.exe -f  ..\imagenes_forenses\memoria.raw --profile=%perfil% kdbgscan | findstr (V) > ..\archivos_temporales\offset_temp.txt
+set /p offset=<..\archivos_temporales\offset_temp.txt
+echo Apuntadores de Menoria en la imagen
+echo .......................................................
+echo %offset%
+echo .......................................................
+SET /p apuntador= ^> Digite el apuntador en pantalla para la busqueda:
+volatility.exe -f ..\imagenes_forenses\memoria.raw --profile=%perfil% --kdbg=%apuntador% pstree> ..\resultados_artefactos\info_kernel_jerarquia.txt
+echo. Ya se creo la información del Kernel jerarquicamente en la ruta 
+echo.
+pause
 goto:inicio2
 echo.
 pause
-:: Se cierra la opción 2.2
+:: Se cierra la opción 2.3
 goto:inicio
 :: cierra la opción 2
 :op3
