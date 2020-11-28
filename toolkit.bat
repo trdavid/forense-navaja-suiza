@@ -320,6 +320,34 @@ goto:inicio2
 echo.
 pause
 :: Se cierra la opción 2.5
+:: Inicia la opción 2.6
+:op2_6
+echo.
+echo. Has elegido la opcion No. 2.6 Reconstruir y Volcar Ejecutables
+echo.
+cd volatility
+volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
+set /p suggested=<..\archivos_temporales\suggested_temp.txt
+echo Perfiles Encontrados en la imagen
+echo .......................................................
+echo %suggested%
+echo .......................................................
+SET /p perfil= ^> Digite el segundo perfil de la linea anterior para la busqueda:
+volatility.exe -f  ..\imagenes_forenses\memoria.raw --profile=%perfil% kdbgscan | findstr (V) > ..\archivos_temporales\offset_temp.txt
+set /p offset=<..\archivos_temporales\offset_temp.txt
+echo Apuntadores de Menoria en la imagen
+echo .......................................................
+echo %offset%
+echo .......................................................
+SET /p apuntador= ^> Digite el apuntador en pantalla para la busqueda:
+volatility.exe -f ..\imagenes_forenses\memoria.raw --profile=%perfil% --kdbg=%apuntador% procexedump --dump-d ..\resultados_artefactos\ejecutables
+echo.Ya se creo la información de los Aplicativos en la ruta especificada...... 
+echo.
+pause
+goto:inicio2
+echo.
+pause
+:: Se cierra la opción 2.5
 goto:inicio
 :: cierra la opción 2
 :op3
