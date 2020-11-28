@@ -460,6 +460,90 @@ goto:inicio2
 echo.
 pause
 :: Se cierra la opción 2.10
+:: Inicia la opción 2.11
+:op2_11
+echo.
+echo. Has elegido la opcion No. 2.11 Dispositivos Conectados
+echo.
+cd volatility
+volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
+set /p suggested=<..\archivos_temporales\suggested_temp.txt
+echo Perfiles Encontrados en la imagen
+echo .......................................................
+echo %suggested%
+echo .......................................................
+SET /p perfil= ^> Digite el segundo perfil de la linea anterior para la busqueda:
+volatility.exe -f  ..\imagenes_forenses\memoria.raw --profile=%perfil% kdbgscan | findstr (V) > ..\archivos_temporales\offset_temp.txt
+set /p offset=<..\archivos_temporales\offset_temp.txt
+echo Apuntadores de Menoria en la imagen
+echo .......................................................
+echo %offset%
+echo .......................................................
+SET /p apuntador= ^> Digite el apuntador en pantalla para la busqueda:
+volatility.exe -f ..\imagenes_forenses\memoria.raw --profile=%perfil% --kdbg=%apuntador% devicetree > ..\resultados_artefactos\dispositivos.txt
+echo.Ya se creo la información de los dispositivos en la ruta especificada.....
+echo.
+pause
+goto:inicio2
+echo.
+pause
+:: Se cierra la opción 2.11
+:: Inicia la opción 2.12
+:op2_12
+echo.
+echo. Has elegido la opcion No. 2.12 Ubicación de Registros del Sistema
+echo.
+cd volatility
+volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
+set /p suggested=<..\archivos_temporales\suggested_temp.txt
+echo Perfiles Encontrados en la imagen
+echo .......................................................
+echo %suggested%
+echo .......................................................
+SET /p perfil= ^> Digite el segundo perfil de la linea anterior para la busqueda:
+volatility.exe -f  ..\imagenes_forenses\memoria.raw --profile=%perfil% kdbgscan | findstr (V) > ..\archivos_temporales\offset_temp.txt
+set /p offset=<..\archivos_temporales\offset_temp.txt
+echo Apuntadores de Menoria en la imagen
+echo .......................................................
+echo %offset%
+echo .......................................................
+SET /p apuntador= ^> Digite el apuntador en pantalla para la busqueda:
+volatility.exe -f ..\imagenes_forenses\memoria.raw --profile=%perfil% --kdbg=%apuntador% hivescan > ..\resultados_artefactos\registros_sistema.txt
+echo.Ya se creo la información de los dispositivos en la ruta especificada.....
+echo.
+pause
+goto:inicio2
+echo.
+pause
+:: Se cierra la opción 2.12
+:: Inicia la opción 2.13
+:op2_13
+echo.
+echo. Has elegido la opcion No. 2.13 Reconstruir Archivos de Sistema
+echo.
+cd volatility
+volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
+set /p suggested=<..\archivos_temporales\suggested_temp.txt
+echo Perfiles Encontrados en la imagen
+echo .......................................................
+echo %suggested%
+echo .......................................................
+SET /p perfil= ^> Digite el segundo perfil de la linea anterior para la busqueda:
+volatility.exe -f  ..\imagenes_forenses\memoria.raw --profile=%perfil% kdbgscan | findstr (V) > ..\archivos_temporales\offset_temp.txt
+set /p offset=<..\archivos_temporales\offset_temp.txt
+echo Apuntadores de Menoria en la imagen
+echo .......................................................
+echo %offset%
+echo .......................................................
+SET /p apuntador= ^> Digite el apuntador en pantalla para la busqueda:
+volatility.exe -f ..\imagenes_forenses\memoria.raw --profile=%perfil% --kdbg=%apuntador% hivelist %offset% > ..\resultados_artefactos\Ubicacion_registros.txt
+echo.Ya se creo la información de los dispositivos en la ruta especificada.....
+echo.
+pause
+goto:inicio2
+echo.
+pause
+:: Se cierra la opción 2.13
 goto:inicio
 :: cierra la opción 2
 :op3
