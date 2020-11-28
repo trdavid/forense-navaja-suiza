@@ -8,6 +8,11 @@ SET var1=0
 SET maquina=0
 SET suggested=0
 SET perfil=0
+SET varencabezado=0
+SET varsystem=0
+SET varsam=0
+SET sam=0
+SET system=0
 
 wmic bios get serialnumber | find "SerialNumber" /v > archivos_temporales/serial_temp.txt
 set /p maquina=<archivos_temporales/serial_temp.txt
@@ -544,12 +549,61 @@ goto:inicio2
 echo.
 pause
 :: Se cierra la opción 2.13
-goto:inicio
-:: cierra la opción 2
-:op3
+:: Inicia la opción 2.14
+:op2_14
 echo.
-echo. Has elegido la opcion No. 3
-::Aquí van las líneas de comando de tu opción
+echo. Has elegido la opcion No. 2.14 Hash de Contraseña de usuario
+echo.
+cd volatility
+volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
+set /p suggested=<..\archivos_temporales\suggested_temp.txt
+echo Perfiles Encontrados en la imagen
+echo .......................................................
+echo %suggested%
+echo .......................................................
+SET /p perfil= ^> Digite el segundo perfil de la linea anterior para la busqueda:
+volatility.exe -f  ..\imagenes_forenses\memoria.raw --profile=%perfil% kdbgscan | findstr (V) > ..\archivos_temporales\offset_temp.txt
+set /p offset=<..\archivos_temporales\offset_temp.txt
+echo Apuntadores de Menoria en la imagen
+echo .......................................................
+echo %offset%
+echo .......................................................
+SET /p apuntador= ^> Digite el apuntador en pantalla para la busqueda:
+volatility.exe -f ..\imagenes_forenses\memoria.raw --profile=%perfil% --kdbg=%apuntador% hivelist | findstr Virtual > ..\archivos_temporales\encabezado_temp.txt
+volatility.exe -f ..\imagenes_forenses\memoria.raw --profile=%perfil% --kdbg=%apuntador% hivelist | findstr \SystemRoot\System32\Config\SAM > ..\archivos_temporales\sam_temp.txt
+volatility.exe -f ..\imagenes_forenses\memoria.raw --profile=%perfil% --kdbg=%apuntador% hivelist | findstr \REGISTRY\MACHINE\SYSTEM > ..\archivos_temporales\sys_temp.txt
+set /p varencabezado=<..\archivos_temporales\encabezado_temp.txt
+set /p varsam=<..\archivos_temporales\sam_temp.txt
+set /p varsystem=<..\archivos_temporales\sys_temp.txt
+echo .......................................................
+echo Posiciones de memoria Carpetas SAM
+echo .......................................................
+echo %varencabezado%
+echo %varsam%
+echo .......................................................
+SET /p sam= ^> Digite la posición en memoria VIRTUAL(*) de la carpeta SAM que se esta mostrando en la linea anterior para la busqueda:
+echo .......................................................
+echo Posiciones de memoria Carpetas SYSTEM
+echo .......................................................
+echo %varencabezado%
+echo %varsystem%
+echo .......................................................
+SET /p system= ^> Digite la posición en memoria VIRTUAL(*) de la carpeta SYSTEM que se esta mostrando en la linea anterior para la busqueda:
+echo .......................................................
+echo usted digito lo siguiente
+echo .......................................................
+echo posición SYSTEM = %system%
+echo posición SAM = %sam%
+volatility.exe -f ..\imagenes_forenses\memoria.raw --profile=%perfil% --kdbg=%apuntador% hashdump -s %sam% -y %system% > ..\resultados_artefactos\hash_system_sam.txt
+echo.Ya se creo la información de los dispositivos en la ruta especificada.....
 echo.
 pause
+goto:inicio2
+echo.
+pause
+:: Se cierra la opción 2.14
 goto:inicio
+:: cierra la opción 2
+pause
+goto:inicio
+:: cierra la opción 1
