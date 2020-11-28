@@ -404,6 +404,34 @@ goto:inicio2
 echo.
 pause
 :: Se cierra la opción 2.8
+:: Inicia la opción 2.9
+:op2_9
+echo.
+echo. Has elegido la opcion No. 2.9 Objetos y Ubicación en memoria RAM
+echo.
+cd volatility
+volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
+set /p suggested=<..\archivos_temporales\suggested_temp.txt
+echo Perfiles Encontrados en la imagen
+echo .......................................................
+echo %suggested%
+echo .......................................................
+SET /p perfil= ^> Digite el segundo perfil de la linea anterior para la busqueda:
+volatility.exe -f  ..\imagenes_forenses\memoria.raw --profile=%perfil% kdbgscan | findstr (V) > ..\archivos_temporales\offset_temp.txt
+set /p offset=<..\archivos_temporales\offset_temp.txt
+echo Apuntadores de Menoria en la imagen
+echo .......................................................
+echo %offset%
+echo .......................................................
+SET /p apuntador= ^> Digite el apuntador en pantalla para la busqueda:
+volatility.exe -f ..\imagenes_forenses\memoria.raw --profile=%perfil% --kdbg=%apuntador% filescan > ..\resultados_artefactos\objetos_en_ram.txt
+echo.Ya se creo la información de la ubicación de los objetos en la ruta.....
+echo.
+pause
+goto:inicio2
+echo.
+pause
+:: Se cierra la opción 2.9
 goto:inicio
 :: cierra la opción 2
 :op3
