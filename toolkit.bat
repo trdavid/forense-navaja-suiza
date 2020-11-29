@@ -87,7 +87,7 @@ goto:inicio1
 :: comienza la opcion 1.2
 echo.
 echo. Has elegido la opcion No. 1.2 Generar la Hora
-cd heramientas_sys_internals
+cd heramientas_sys_internals\
 time /t > ..\resultados_volatiles\hora_%maquina%_.txt
 echo. ya se creo el archivo de hora en la carpeta resultados_volatiles
 echo.
@@ -98,7 +98,7 @@ goto:inicio1
 :: comienza la opcion 1.3
 echo.
 echo. Has elegido la opcion No. 1.3 Lista de Procesos
-cd heramientas_sys_internals
+cd heramientas_sys_internals\
 pslist > ..\resultados_volatiles\listado_procesos.txt
 echo. ya se creo el archivo de listado de procesos en la carpeta resultados_volatiles
 echo.
@@ -109,7 +109,7 @@ goto:inicio1
 :: comienza la opcion 1.4
 echo.
 echo. Has elegido la opcion No. 1.4 Lista de Librerias
-cd heramientas_sys_internals
+cd heramientas_sys_internals\
 listdlls > ..\resultados_volatiles\listado_librerias.txt
 echo. Se ha Generado el archivo de librerias en la carpeta resultados_volatiles
 echo.
@@ -120,7 +120,7 @@ goto:inicio1
 :: comienza la opcion 1.5
 echo.
 echo. Has elegido la opcion No. 1.5 Todas las anteriores
-cd heramientas_sys_internals
+cd heramientas_sys_internals\
 date /t > ..\resultados_volatiles\fecha_%maquina%_.txt
 time /t > ..\resultados_volatiles\hora_%maquina%_.txt
 pslist > ..\resultados_volatiles\listado_procesos.txt
@@ -207,7 +207,7 @@ goto:inicio2
 echo.
 echo. Has elegido la opcion No. 2.1 Generar Info de Imagen
 echo.
-cd volatility
+cd volatility\
 volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo > ..\resultados_artefactos\info_imagen_raw.txt
 echo. Ya se creo la información de la Imagen en la ruta especificada......
 echo.
@@ -221,7 +221,7 @@ pause
 echo.
 echo. Has elegido la opción No. 2.2 Generar Info del Kernel
 echo.
-cd volatility
+cd volatility\
 volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
 set /p suggested=<..\archivos_temporales\suggested_temp.txt
 echo Perfiles Encontrados en la imagen
@@ -240,13 +240,16 @@ volatility.exe -f ..\imagenes_forenses\memoria.raw --profile=%perfil% --kdbg=%ap
 echo. Ya se creo la información del Kernel en la ruta especificada......
 echo.
 pause
+goto:inicio2
+echo.
+pause
 :: Se cierra la opción 2.2
 :: Inicia la opción 2.3
 :op2_3
 echo.
 echo. Has elegido la opcion No. 2.3 Generar Info del Kernel a Nivel Jerarquico
 echo.
-cd volatility
+cd volatility\
 volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
 set /p suggested=<..\archivos_temporales\suggested_temp.txt
 echo Perfiles Encontrados en la imagen
@@ -274,7 +277,7 @@ pause
 echo.
 echo. Has elegido la opcion No. 2.4 Generar Lista de Librerias
 echo.
-cd volatility
+cd volatility\
 volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
 set /p suggested=<..\archivos_temporales\suggested_temp.txt
 echo Perfiles Encontrados en la imagen
@@ -302,7 +305,7 @@ pause
 echo.
 echo. Has elegido la opcion No. 2.5 Generar Uso de Aplicativos
 echo.
-cd volatility
+cd volatility\
 volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
 set /p suggested=<..\archivos_temporales\suggested_temp.txt
 echo Perfiles Encontrados en la imagen
@@ -330,7 +333,7 @@ pause
 echo.
 echo. Has elegido la opcion No. 2.6 Reconstruir y Volcar Ejecutables
 echo.
-cd volatility
+cd volatility\
 volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
 set /p suggested=<..\archivos_temporales\suggested_temp.txt
 echo Perfiles Encontrados en la imagen
@@ -358,7 +361,7 @@ pause
 echo.
 echo. Has elegido la opcion No. 2.7 Reconstruir y Volcar Librerias
 echo.
-cd volatility
+cd volatility\
 volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
 set /p suggested=<..\archivos_temporales\suggested_temp.txt
 echo Perfiles Encontrados en la imagen
@@ -386,7 +389,7 @@ pause
 echo.
 echo. Has elegido la opcion No. 2.8 Reconstruir Eventos
 echo.
-cd volatility
+cd volatility\
 volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
 set /p suggested=<..\archivos_temporales\suggested_temp.txt
 echo Perfiles Encontrados en la imagen
@@ -414,7 +417,7 @@ pause
 echo.
 echo. Has elegido la opcion No. 2.9 Objetos y Ubicación en memoria RAM
 echo.
-cd volatility
+cd volatility\
 volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
 set /p suggested=<..\archivos_temporales\suggested_temp.txt
 echo Perfiles Encontrados en la imagen
@@ -442,7 +445,7 @@ pause
 echo.
 echo. Has elegido la opcion No. 2.10 Metadatos de Archivos
 echo.
-cd volatility
+cd volatility\
 volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
 set /p suggested=<..\archivos_temporales\suggested_temp.txt
 echo Perfiles Encontrados en la imagen
@@ -470,7 +473,7 @@ pause
 echo.
 echo. Has elegido la opcion No. 2.11 Dispositivos Conectados
 echo.
-cd volatility
+cd volatility\
 volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
 set /p suggested=<..\archivos_temporales\suggested_temp.txt
 echo Perfiles Encontrados en la imagen
@@ -498,7 +501,7 @@ pause
 echo.
 echo. Has elegido la opcion No. 2.12 Ubicación de Registros del Sistema
 echo.
-cd volatility
+cd volatility\
 volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
 set /p suggested=<..\archivos_temporales\suggested_temp.txt
 echo Perfiles Encontrados en la imagen
@@ -526,7 +529,7 @@ pause
 echo.
 echo. Has elegido la opcion No. 2.13 Reconstruir Archivos de Sistema
 echo.
-cd volatility
+cd volatility\
 volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
 set /p suggested=<..\archivos_temporales\suggested_temp.txt
 echo Perfiles Encontrados en la imagen
@@ -554,7 +557,7 @@ pause
 echo.
 echo. Has elegido la opcion No. 2.14 Hash de Contraseña de usuario
 echo.
-cd volatility
+cd volatility\
 volatility.exe -f ..\imagenes_forenses\memoria.raw imageinfo | findstr Suggested > ..\archivos_temporales\suggested_temp.txt
 set /p suggested=<..\archivos_temporales\suggested_temp.txt
 echo Perfiles Encontrados en la imagen
