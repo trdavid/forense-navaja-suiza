@@ -1,3 +1,4 @@
 # forense-navaja-suiza
-## Proyecto realizado por Forense Team
-# Integrantes: Javier Garcia, Lina Rodriguez, Manuel Castro, David Triana
+# Proyecto realizado por Forense Team
+# Integrantes: 
+# Lina Rodriguez, Javier Garcia, Manuel Castro, David Triana
